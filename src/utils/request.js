@@ -5,7 +5,8 @@ import { getToken } from '@/utils/auth'
 
 // 创建axios实例
 const service = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
+  // 摄者每次请求发送前拼接的地址
+  baseURL: process.env.VUE_APP_BASE_API,
   // withCredentials: true, // send cookies when cross-domain requests
   timeout: 5000 // 超时设置
 })
@@ -45,8 +46,8 @@ service.interceptors.response.use(
   response => {
     const res = response.data
 
-    // 如果自定义代码不是20000，则判定为错误。
-    if (res.code !== 20000) {
+    // 如果自定义代码不是200，则判定为错误。
+    if (res.code !== 200) {
       Message({
         message: res.message || 'Error',
         type: 'error',
@@ -61,7 +62,7 @@ service.interceptors.response.use(
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          store.dispatch('user/resetToken').then(() => {
+          store.dispatch('employee/resetToken').then(() => {
             location.reload()
           })
         })
@@ -76,7 +77,7 @@ service.interceptors.response.use(
     Message({
       message: error.message,
       type: 'error',
-      duration: 5 * 1000
+      duration: 3 * 1000
     })
     return Promise.reject(error)
   }

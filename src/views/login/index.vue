@@ -12,7 +12,7 @@
         </span>
         <el-input
           ref="username"
-          v-model="loginForm.username"
+          v-model="loginForm.phoneNumber"
           placeholder="用户名"
           name="username"
           type="text"
@@ -53,21 +53,19 @@
 </template>
 
 <script>
-import { validUsername } from '@/utils/validate'
+import { validPhoneNumber } from '@/utils/validate'
 
 export default {
   name: 'Login',
   data() {
     const validateUsername = (rule, value, callback) => {
-      // TODO 用户名验证
-      if (!validUsername(value)) {
+      if (!validPhoneNumber(value)) {
         callback(new Error('请输入正确的用户名'))
       } else {
         callback()
       }
     }
     const validatePassword = (rule, value, callback) => {
-      // TODO 密码验证
       if (value.length < 6) {
         callback(new Error('密码不能少于6位'))
       } else {
@@ -76,14 +74,11 @@ export default {
     }
     return {
       loginForm: {
-        username: 'admin',
-        password: '111111'
+        phoneNumber: '17634409136',
+        password: '123456'
       },
       loginRules: {
-        username: [
-          { required: true, trigger: 'blur', message: '请输入手机号' },
-          { pattern: /^1(3\d{2}|4[14-9]\d|5([0-35689]\d|7[1-79])|66\d|7[2-35-8]\d|8\d{2}|9[13589]\d)\d{7}$/, message: '手机号格式有误', trigger: 'blur' }
-        ],
+        phoneNumber: [{ required: true, trigger: 'blur', validator: validateUsername }],
         password: [{ required: true, trigger: 'blur', validator: validatePassword }]
       },
       loading: false,
@@ -115,7 +110,7 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
-          this.$store.dispatch('user/login', this.loginForm).then(() => {
+          this.$store.dispatch('employee/login', this.loginForm).then(() => {
             this.$router.push({ path: this.redirect || '/' })
             this.loading = false
           }).catch(() => {
