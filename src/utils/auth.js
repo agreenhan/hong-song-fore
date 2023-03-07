@@ -12,3 +12,18 @@ export function setToken(token) {
 export function removeToken() {
   return localStorage.removeItem('token')
 }
+
+// 获取路由
+export function getRouters() {
+  return localStorage.getItem("routerMap")
+}
+
+// 设置路由
+export function setRouters(routeMap) {
+  return localStorage.setItem("routerMap", routeMap)
+}
+
+// 获取路由
+export function removeRouters() {
+  return localStorage.removeItem("routerMap")
+}

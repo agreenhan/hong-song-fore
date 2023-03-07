@@ -60,10 +60,11 @@ const actions = {
   },
 
   // 员工退出
-  logout({ commit, state }) {
+  logout({ commit }) {
     return new Promise((resolve, reject) => {
-      logout(state.token).then((response) => {
-        removeToken() // 必须先移除token
+      logout().then((response) => {
+        console.log("移除token")
+        removeToken() // 成功后移除token
         resetRouter()
         commit('RESET_STATE')
         this.$message.success(response.data.message)
