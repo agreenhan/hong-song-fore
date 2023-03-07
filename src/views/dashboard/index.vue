@@ -1,6 +1,8 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-text">name: {{ name }}</div>
+    <div class="dashboard-text">
+      欢迎进入洪松公司员工综合考评系统
+    </div>
   </div>
 </template>
 
@@ -21,10 +23,12 @@ export default {
 .dashboard {
   &-container {
     margin: 30px;
+    font-family: "PingFang SC";
   }
   &-text {
     font-size: 30px;
     line-height: 46px;
+    text-align: center;
   }
 }
 </style>

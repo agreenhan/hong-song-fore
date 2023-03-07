@@ -21,7 +21,7 @@ export function getInfo() {
 export function logout() {
   return request({
     url: '/employee/logout',
-    method: 'post'
+    method: 'get'
   })
 }
 
@@ -30,3 +30,6 @@ export function logout() {
 // TODO 修改员工信息
 
 // TODO 删除员工信息
+
+// TODO 查询员工详情信息
+

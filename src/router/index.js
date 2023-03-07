@@ -19,6 +19,13 @@ export const constantRoutes = [
   },
 
   {
+    path: "/forget",
+    name: "forget",
+    component: () => import('@/views/login/forget'),
+    hidden: true
+  },
+
+  {
     path: '/',
     component: Layout,
     redirect: '/dashboard',
@@ -26,7 +33,7 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      meta: { title: '首页', icon: 'dashboard' }
     }]
   },
 

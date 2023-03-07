@@ -29,7 +29,6 @@ const actions = {
     const { phoneNumber, password } = userInfo
     return new Promise((resolve, reject) => {
       login({ phoneNumber: phoneNumber.trim(), password: password }).then(response => {
-        console.log("#####" + response.data)
         const { data } = response
         commit('SET_TOKEN', data.token)
         setToken(data.token)
@@ -44,7 +43,6 @@ const actions = {
   getInfo({ commit }) {
     return new Promise((resolve, reject) => {
       getInfo().then(response => {
-        console.log("@@@@@@" + response)
         const { data } = response
 
         if (!data) {
@@ -64,10 +62,11 @@ const actions = {
   // 员工退出
   logout({ commit, state }) {
     return new Promise((resolve, reject) => {
-      logout(state.token).then(() => {
+      logout(state.token).then((response) => {
         removeToken() // 必须先移除token
         resetRouter()
         commit('RESET_STATE')
+        this.$message.success(response.data.message)
         resolve()
       }).catch(error => {
         reject(error)
